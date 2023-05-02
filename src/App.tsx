@@ -3,7 +3,7 @@ import { items } from "./ListData";
 import { useState } from "react";
 import { Item } from "./types/Item";
 
-function App() {
+export const App = () => {
 
     const [selectedItems, setSelectedItems] = useState<Item[]>([]);
 
@@ -14,7 +14,5 @@ function App() {
                 selectedItems={selectedItems}
                 onSelectedItemsChange={setSelectedItems}/>
         </div>
-    )
+    );
 }
-
-export default App

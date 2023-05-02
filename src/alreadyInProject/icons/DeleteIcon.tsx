@@ -6,7 +6,7 @@ export interface DeleteIconProps {
     onClick?: MouseEventHandler<SVGElement>;
 }
 export const DeleteIcon = (props: DeleteIconProps) => {
-    const {className, onClick, title} = props;
+    const {className, onClick} = props;
     return (
         <svg
             onClick={onClick}
