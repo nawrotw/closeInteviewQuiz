@@ -1,0 +1,31 @@
+.Chip__container {
+  min-height: 40px;
+
+  :not(:last-child) {
+    margin-right: 5px;
+  }
+  padding-top: 10px;
+}
+.Chip__item {
+  padding: 5px 10px;
+  border: 1px solid;
+  border-radius: 5px;
+  margin-bottom: 5px;
+
+  //text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+  display: inline-flex;
+  align-items: center;
+}
+.Chip__deleteIcon {
+  cursor: pointer;
+  margin-right: -5px;
+
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  -webkit-transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  font-size: 1.3rem;
+}
