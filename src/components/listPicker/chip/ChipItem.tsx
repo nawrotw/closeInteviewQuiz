@@ -20,3 +20,5 @@ export const ChipItem = memo((props: ChipProps) => {
         <DeleteIcon className='Chip__deleteIcon' onClick={handleDeleteClick}/>
     </div>)
 });
+
+ChipItem.displayName = 'ChipItem';  // useful for react profiler

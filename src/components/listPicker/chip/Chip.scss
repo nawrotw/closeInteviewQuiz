@@ -1,23 +1,26 @@
 .Chip__container {
   min-height: 40px;
+  max-height: 80px;
+  overflow: auto;
 
-  :not(:last-child) {
-    margin-right: 5px;
-  }
   padding-top: 10px;
 }
 .Chip__item {
-  padding: 5px 10px;
   border: 1px solid;
   border-radius: 5px;
   margin-bottom: 5px;
 
-  //text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  &:not(:last-child) {
+    margin-right: 5px;
+  }
+
   display: inline-flex;
   align-items: center;
 }
 .Chip__deleteIcon {
   cursor: pointer;
+  margin-left: 5px;
   margin-right: -5px;
 
   user-select: none;

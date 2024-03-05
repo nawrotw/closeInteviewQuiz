@@ -16,7 +16,7 @@ export const useSelection = <T extends Item = Item>(props: UseSelectionProps<T>)
         onSelectedItemsChange(selectedItems);
     }, [selectedItems, onSelectedItemsChange]);
 
-    const isSelected = (item: T) => selectedItems.some((selected) => selected.name === item.name);
+    const isSelected = (item: T) => selectedItems.includes(item);
 
     const toggleSelect = useCallback((item: T) => {
         setSelectedItems(selectedItems =>
@@ -25,6 +25,7 @@ export const useSelection = <T extends Item = Item>(props: UseSelectionProps<T>)
                 [...selectedItems, item] // this will add item always to the end of the selected list
         )
     }, []);
+
     const clearSelected = useCallback((item: T) => {
         setSelectedItems(selectedItems => selectedItems.filter((selectedItem) => selectedItem.name !== item.name))
     }, []);

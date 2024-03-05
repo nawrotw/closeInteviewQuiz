@@ -9,12 +9,11 @@ import { ListItem } from "./ListItem";
 export type ListProps = UseSelectionProps<Item>;
 
 export const ListPicker = (props: ListProps) => {
-    // console.log('[List]     render'); // left for performance check
 
     const { items, selectedItems } = props;
 
     const [filteredItems, setFilteredItems] = useState(items);
-    const { toggleSelect, clearSelected, clearAll, selectAll } = useSelection({
+    const { toggleSelect, clearSelected, isSelected, clearAll, selectAll } = useSelection({
         ...props,
         items: filteredItems,
     });
@@ -33,7 +32,7 @@ export const ListPicker = (props: ListProps) => {
         <ChipList items={selectedItems} onItemDelete={clearSelected}/>
         <ul className="ListPicker__list">
             {filteredItems.map(item => (
-                <ListItem key={item.name} item={item} isSelected={selectedItems.includes(item)} toggleSelect={toggleSelect}/>
+                <ListItem key={item.name} item={item} isSelected={isSelected(item)} toggleSelect={toggleSelect}/>
             ))}
         </ul>
     </div>);
