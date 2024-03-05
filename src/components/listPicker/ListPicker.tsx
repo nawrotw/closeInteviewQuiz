@@ -4,18 +4,17 @@ import { useState } from "react";
 import { FilterTextField } from "./searchField/FilterTextField";
 import { ChipList } from "./chip/ChipList";
 import { Item } from "../../types/Item";
+import { ListItem } from "./ListItem";
 
 export type ListProps = UseSelectionProps<Item>;
 
-// At the moment when ListPicker component would be used for picking something other than an Item,
-// I would like to do a refactor which would decouple ListPicker and all its components from Item
-// and create LP generic version easy to be used in the future.
 export const ListPicker = (props: ListProps) => {
-    console.log('render'); // left for performance check
-    
+    // console.log('[List]     render'); // left for performance check
+
     const { items, selectedItems } = props;
+
     const [filteredItems, setFilteredItems] = useState(items);
-    const { isSelected, toggleSelect, clearAll, selectAll } = useSelection({
+    const { toggleSelect, clearSelected, clearAll, selectAll } = useSelection({
         ...props,
         items: filteredItems,
     });
@@ -29,17 +28,12 @@ export const ListPicker = (props: ListProps) => {
             />
             <div className='ListPicker__counter'>{selectedItems.length}/{filteredItems.length}</div>
             <button onClick={selectAll}>Select all</button>
-            <button onClick={clearAll}>Remove all</button>
+            <button onClick={clearAll}>Clear Selection</button>
         </div>
-        <ChipList items={selectedItems} onItemClick={toggleSelect} onClearAll={clearAll}/>
+        <ChipList items={selectedItems} onItemDelete={clearSelected}/>
         <ul className="ListPicker__list">
             {filteredItems.map(item => (
-                <li key={item.name}
-                    className={`ListPicker__item ListPicker__item--${item.color}${isSelected(item) ? ' ListPicker__item--selected' : ''}`}
-                    onClick={() => toggleSelect(item)}
-                >
-                    {item.name}
-                </li>
+                <ListItem key={item.name} item={item} isSelected={selectedItems.includes(item)} toggleSelect={toggleSelect}/>
             ))}
         </ul>
     </div>);

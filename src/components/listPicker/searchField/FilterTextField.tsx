@@ -16,8 +16,9 @@ export const FilterTextField = <T, >(props: SearchFieldProps<T>) => {
 
     const handleChange = (searchTerm: string) => {
         setSearchTerm(searchTerm);
+        const searchStringLowerCase = searchTerm.toLowerCase();
         const filteredItems = searchTerm ?
-            items.filter((item) => getText(item).toLowerCase().includes(searchTerm.toLowerCase())) :
+            items.filter((item) => getText(item).toLowerCase().includes(searchStringLowerCase)) :
             [...items];
         onChange(filteredItems);
     }

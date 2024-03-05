@@ -1,34 +1,42 @@
 import { Item } from "../../types/Item";
+import { useEffect, useCallback, useState } from "react";
 
-export interface UseSelectionProps<T> {
+export interface UseSelectionProps<T extends Item> {
     items: T[];
     selectedItems: T[];
     onSelectedItemsChange: (items: T[]) => void;
 }
 
-export const useSelection = <T = Item>(props: UseSelectionProps<T>) => {
+export const useSelection = <T extends Item = Item>(props: UseSelectionProps<T>) => {
 
-    const {items, selectedItems, onSelectedItemsChange} = props;
+    const { items, selectedItems: initiallySelected, onSelectedItemsChange } = props;
+    const [selectedItems, setSelectedItems] = useState<T[]>(initiallySelected);
+
+    useEffect(() => {
+        onSelectedItemsChange(selectedItems);
+    }, [selectedItems, onSelectedItemsChange]);
 
     const isSelected = (item: T) => selectedItems.some((selected) => selected.name === item.name);
 
-    const toggleSelect = (item: T) => {
-        onSelectedItemsChange(
-            isSelected(item) ?
+    const toggleSelect = useCallback((item: T) => {
+        setSelectedItems(selectedItems =>
+            selectedItems.includes(item) ?
                 selectedItems.filter((selectedItem) => selectedItem.name !== item.name) :
                 [...selectedItems, item] // this will add item always to the end of the selected list
-                // TODO: here selectedItems order is always the same as original items order, to discuss which version should be used
-                // items.filter(sortedItem => sortedItem.name === item.name || isSelected(sortedItem))
         )
-    };
+    }, []);
+    const clearSelected = useCallback((item: T) => {
+        setSelectedItems(selectedItems => selectedItems.filter((selectedItem) => selectedItem.name !== item.name))
+    }, []);
 
-    const clearAll = () => onSelectedItemsChange([]);
-    const selectAll = () => onSelectedItemsChange([...items]);
+    const clearAll = () => setSelectedItems([]);
+    const selectAll = () => setSelectedItems([...items]);
 
     return {
         selectedItems,
         isSelected,
         toggleSelect,
+        clearSelected,
         clearAll,
         selectAll,
     }

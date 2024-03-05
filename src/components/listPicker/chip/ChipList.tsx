@@ -3,18 +3,17 @@ import { Item } from "../../../types/Item";
 
 export interface ChipListProps {
     items: Item[];
-    onItemClick: (item: Item) => void;
-    onClearAll: () => void;
+    onItemDelete: (item: Item) => void;
 }
 
 export const ChipList = (props: ChipListProps) => {
 
-    const { items, onItemClick, onClearAll } = props;
+    const { items, onItemDelete } = props;
 
     return (
         <div className='Chip__container'>
             {items.map(item =>
-                <ChipItem key={item.name} item={item} onClick={onItemClick}/>
+                <ChipItem key={item.name} item={item} onDelete={onItemDelete}/>
             )}
         </div>
 
