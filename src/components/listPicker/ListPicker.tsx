@@ -1,22 +1,19 @@
 import "./ListPicker.scss";
-import { useSelection, UseSelectionProps } from "./useSelection";
+import { useSelection } from "./useSelection";
 import { useState } from "react";
 import { FilterTextField } from "./searchField/FilterTextField";
 import { ChipList } from "./chip/ChipList";
 import { Item } from "../../types/Item";
 import { ListItem } from "./ListItem";
 
-export type ListProps = UseSelectionProps<Item>;
+export interface ListProps {
+    items: Item[];
+}
 
-export const ListPicker = (props: ListProps) => {
-
-    const { items, selectedItems } = props;
+export const ListPicker = ({ items }: ListProps) => {
 
     const [filteredItems, setFilteredItems] = useState(items);
-    const { toggleSelect, clearSelected, isSelected, clearAll, selectAll } = useSelection({
-        ...props,
-        items: filteredItems,
-    });
+    const { selectedItems, toggleSelect, clearSelected, isSelected, clearAll, selectAll } = useSelection({ items: filteredItems });
 
     return (<div className="ListPicker">
         <div className='ListPicker__searchBar'>

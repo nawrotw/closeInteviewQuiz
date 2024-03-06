@@ -9,10 +9,12 @@ export const App = () => {
 
     return (
         <div className='App'>
+{/*
             <ListPicker
                 items={items}
                 selectedItems={selectedItems}
                 onSelectedItemsChange={setSelectedItems}/>
+*/}
         </div>
     );
 }
