@@ -4,9 +4,19 @@
 
 .ListPicker__searchBar {
   display: flex;
+  gap: 5px;
+  flex-direction: column;
+  @media (min-width: 400px) {
+    flex-direction: row;
+  }
+}
+
+.ListPicker__textField {
+  display: flex;
 }
 .ListPicker__counter {
   padding: 5px 10px;
+  margin: auto;
 }
 
 .ListPicker__list {

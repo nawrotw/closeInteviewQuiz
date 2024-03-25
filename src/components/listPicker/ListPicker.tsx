@@ -17,12 +17,14 @@ export const ListPicker = ({ items }: ListProps) => {
 
     return (<div className="ListPicker">
         <div className='ListPicker__searchBar'>
-            <FilterTextField<Item>
-                items={items}
-                onChange={setFilteredItems}
-                getText={(item) => item.name}
-            />
-            <div className='ListPicker__counter'>{selectedItems.length}/{filteredItems.length}</div>
+            <div className='ListPicker__textField'>
+                <FilterTextField<Item>
+                    items={items}
+                    onChange={setFilteredItems}
+                    getText={(item) => item.name}
+                />
+                <div className='ListPicker__counter'>{selectedItems.length}/{filteredItems.length}</div>
+            </div>
             <button onClick={selectAll}>Select all</button>
             <button onClick={clearAll}>Clear Selection</button>
         </div>

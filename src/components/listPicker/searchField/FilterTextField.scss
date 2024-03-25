@@ -1,6 +1,11 @@
 .TextField__container {
   display: flex;
+  flex: 1;
+  gap: 5px;
+  input {
+    width: 100%;
+  }
 }
 .TextField__searchIcon {
-  margin-right: 5px;
+  margin: auto;
 }
